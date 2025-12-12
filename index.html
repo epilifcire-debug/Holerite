@@ -1,249 +1,181 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gerador de Holerite</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f4f8;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 25px 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #003366;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-    }
-    input {
-      width: 100%;
-      padding: 7px;
-      margin-top: 4px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px 20px;
-      margin-top: 10px;
-    }
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      background: #0052cc;
-      color: #fff;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #003d99;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gerador de Holerite Profissional</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(180deg, #e6f0ff, #f8fafc);
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 900px;
+  background: white;
+  margin: 40px auto;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+h1 {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 25px;
+}
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  font-size: 15px;
+}
+button {
+  margin-top: 25px;
+  width: 100%;
+  background: #004999;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:hover { background: #003366; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px 20px;
+  margin-top: 10px;
+}
+</style>
 </head>
 <body>
   <div class="container">
-    <h1>Gerador de Holerite (HTML + PDF)</h1>
-
+    <h1>Gerador de Holerite em PDF</h1>
     <div class="grid">
-      <div>
-        <label>Nome do Funcionário</label>
-        <input type="text" id="nome" />
-      </div>
-      <div>
-        <label>Mês/Ano Referência (ex: 12/2025)</label>
-        <input type="text" id="mesRef" />
-      </div>
-      <div>
-        <label>Salário (R$)</label>
-        <input type="number" id="salario" step="0.01" />
-      </div>
-      <div>
-        <label>Horas Trabalhadas no mês (HT)</label>
-        <input type="number" id="ht" step="0.01" />
-      </div>
-      <div>
-        <label>Dias Úteis do mês</label>
-        <input type="number" id="diasUteis" />
-      </div>
-      <div>
-        <label>Dias trabalhados (cód. 011)</label>
-        <input type="number" id="diasTrabalhados" />
-      </div>
-      <div>
-        <label>Horas Adicional Noturno 20% (cód. 050)</label>
-        <input type="number" id="horasNoturnas" step="0.01" />
-      </div>
-      <div>
-        <label>Horas Extra 50% (cód. 060)</label>
-        <input type="number" id="horas50" step="0.01" />
-      </div>
-      <div>
-        <label>Horas Extra 100% (cód. 061)</label>
-        <input type="number" id="horas100" step="0.01" />
-      </div>
-      <div>
-        <label>Domingos/Feriados trabalhados (cód. 062)</label>
-        <input type="number" id="domFeriado" />
-      </div>
-      <div>
-        <label>Dias para Vale-Transporte (DT)</label>
-        <input type="number" id="diasVT" />
-      </div>
-      <div>
-        <label>Valor passagem (IDA + VOLTA) (VP)</label>
-        <input type="number" id="valorPassagem" step="0.01" />
-      </div>
+      <div><label>Nome do Funcionário</label><input id="nome"></div>
+      <div><label>Mês/Ano de Referência</label><input id="mes"></div>
+      <div><label>Salário Base (R$)</label><input type="number" id="salario" step="0.01"></div>
+      <div><label>Dias Úteis do mês</label><input type="number" id="diasUteis"></div>
+      <div><label>Dias Trabalhados (cód. 011)</label><input type="number" id="diasTrab"></div>
+      <div><label>Horas Trabalhadas (mês)</label><input type="number" id="horasTrab"></div>
+      <div><label>Dias D.S.R (cód. 049)</label><input type="number" id="dsr"></div>
+      <div><label>Horas Noturnas 20% (cód. 050)</label><input type="number" id="noturno"></div>
+      <div><label>Horas Extra 50% (cód. 060)</label><input type="number" id="extra50"></div>
+      <div><label>Horas Extra 100% (cód. 061)</label><input type="number" id="extra100"></div>
+      <div><label>Domingos/Feriados (cód. 062)</label><input type="number" id="feriado"></div>
+      <div><label>Dias Vale-Transporte</label><input type="number" id="diasVT"></div>
+      <div><label>Valor Passagem (ida + volta)</label><input type="number" id="vp" step="0.01"></div>
     </div>
-
-    <button onclick="gerarPDF()">Gerar Holerite em PDF</button>
+    <button onclick="gerarPDF()">Gerar Holerite PDF</button>
   </div>
 
-  <script>
-    function calcularINSS(salario) {
-      let aliquota = 0;
-      let valor = 0;
-      if (salario <= 1518.00) {
-        aliquota = 7.5;
-        valor = salario * 0.075;
-      } else if (salario <= 2793.88) {
-        aliquota = 9.0;
-        valor = 1518.00 * 0.075 + (salario - 1518.00) * 0.09;
-      } else {
-        aliquota = 12.0;
-        valor = 1518.00 * 0.075 + (2793.88 - 1518.00) * 0.09 + (salario - 2793.88) * 0.12;
-      }
-      return { valor, aliquota };
-    }
+<script>
+function calcularINSS(s) {
+  if (s <= 1518) return { valor: s * 0.075, aliq: 7.5 };
+  if (s <= 2793.88) return { valor: 1518 * 0.075 + (s - 1518) * 0.09, aliq: 9 };
+  if (s <= 4190.83)
+    return { valor: 1518 * 0.075 + (2793.88 - 1518) * 0.09 + (s - 2793.88) * 0.12, aliq: 12 };
+  return {
+    valor: 1518 * 0.075 + (2793.88 - 1518) * 0.09 + (4190.83 - 2793.88) * 0.12 + (s - 4190.83) * 0.14,
+    aliq: 14
+  };
+}
+function fmt(v) { return "R$ " + v.toFixed(2).replace(".", ","); }
 
-    function formatar(valor) {
-      return "R$ " + valor.toFixed(2).replace(".", ",");
-    }
+function gerarPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-    function gerarPDF() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+  const nome = document.getElementById("nome").value.trim() || "Funcionário";
+  const mes = document.getElementById("mes").value.trim() || "00/0000";
+  const sal = parseFloat(document.getElementById("salario").value) || 0;
+  const du = parseFloat(document.getElementById("diasUteis").value) || 1;
+  const dt = parseFloat(document.getElementById("diasTrab").value) || 0;
+  const ht = parseFloat(document.getElementById("horasTrab").value) || 1;
+  const dsr = parseFloat(document.getElementById("dsr").value) || 0;
+  const hn = parseFloat(document.getElementById("noturno").value) || 0;
+  const he50 = parseFloat(document.getElementById("extra50").value) || 0;
+  const he100 = parseFloat(document.getElementById("extra100").value) || 0;
+  const fer = parseFloat(document.getElementById("feriado").value) || 0;
+  const dvt = parseFloat(document.getElementById("diasVT").value) || 0;
+  const vp = parseFloat(document.getElementById("vp").value) || 0;
 
-      const nome = document.getElementById("nome").value.trim() || "Funcionário";
-      const mesRef = document.getElementById("mesRef").value.trim() || "00/0000";
+  const vdt = sal / 30, vhn = vdt / ht;
+  const v011 = vdt * dt;
+  const v050 = (vhn * 0.2) * hn;
+  const v060 = vhn * he50 * 1.5;
+  const v061 = vhn * he100 * 2;
+  const v062 = fer * 101.20;
+  const v049 = ((v050 + v060 + v061 + v062) / du) * dsr;
+  const vtInd = dvt * vp;
+  const vtDesc = v011 * 0.06;
+  const inss = calcularINSS(sal);
 
-      const salario = parseFloat(document.getElementById("salario").value) || 0;
-      const ht = parseFloat(document.getElementById("ht").value) || 1;
-      const diasUteis = parseInt(document.getElementById("diasUteis").value) || 1;
-      const diasTrabalhados = parseInt(document.getElementById("diasTrabalhados").value) || 0;
-      const horasNoturnas = parseFloat(document.getElementById("horasNoturnas").value) || 0;
-      const horas50 = parseFloat(document.getElementById("horas50").value) || 0;
-      const horas100 = parseFloat(document.getElementById("horas100").value) || 0;
-      const domFeriado = parseInt(document.getElementById("domFeriado").value) || 0;
-      const diasVT = parseInt(document.getElementById("diasVT").value) || 0;
-      const valorPassagem = parseFloat(document.getElementById("valorPassagem").value) || 0;
+  const totalProv = v011 + v049 + v050 + v060 + v061 + v062 + vtInd;
+  const totalDesc = inss.valor + vtDesc;
+  const liquido = totalProv - totalDesc;
 
-      const vdt = salario / 30;
-      const vhn = vdt / ht;
+  // Cabeçalho
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("Holerite de Pagamento", 105, 15, null, null, "center");
+  doc.setFontSize(11);
+  doc.text(`Funcionário: ${nome}`, 15, 25);
+  doc.text(`Referência: ${mes}`, 15, 32);
+  doc.line(15, 35, 195, 35);
 
-      const val050 = (vhn * 0.20) * horasNoturnas;
-      const val060 = vhn * horas50 * 1.5;
-      const val061 = vhn * horas100 * 2.0;
-      const val062 = domFeriado * 101.20;
-      const val011 = vdt * diasTrabalhados;
+  // Tabela de 4 colunas
+  let y = 43;
+  doc.setFont("helvetica", "bold");
+  doc.text("Descrição", 17, y);
+  doc.text("Referência", 87, y);
+  doc.text("Provento (R$)", 137, y);
+  doc.text("Desconto (R$)", 177, y);
+  y += 6;
 
-      const somaParaDSR = val050 + val060 + val061 + val062;
-      const val049 = (somaParaDSR / diasUteis) * domFeriado;
+  function linha(desc, ref, prov, descv) {
+    doc.setFont("helvetica", "normal");
+    doc.text(desc, 17, y);
+    doc.text(ref, 92, y);
+    if (prov > 0) doc.text(fmt(prov), 150, y, null, null, "right");
+    if (descv > 0) doc.text(fmt(descv), 190, y, null, null, "right");
+    y += 6;
+  }
 
-      const vt_indenizacao = diasVT * valorPassagem;
+  // Proventos
+  linha("Salário Base (011)", `${dt} dias`, v011, 0);
+  linha("Descanso Semanal (049)", `${dsr} dias`, v049, 0);
+  linha("Adicional Noturno 20% (050)", `${hn} h`, v050, 0);
+  linha("Hora Extra 50% (060)", `${he50} h`, v060, 0);
+  linha("Hora Extra 100% (061)", `${he100} h`, v061, 0);
+  linha("Domingo/Feriado (062)", `${fer} dias`, v062, 0);
+  linha("Indenização VT (100)", `${dvt} dias`, vtInd, 0);
+  // Descontos
+  linha(`INSS (310) ${inss.aliq}%`, "", 0, inss.valor);
+  linha("Vale Transporte (320) 6%", "", 0, vtDesc);
 
-      const inssData = calcularINSS(salario);
-      const inssValor = inssData.valor;
-      const inssAliquota = inssData.aliquota;
+  y += 6;
+  doc.setFont("helvetica", "bold");
+  doc.text(`Total de Proventos: ${fmt(totalProv)}`, 15, y);
+  y += 6;
+  doc.text(`Total de Descontos: ${fmt(totalDesc)}`, 15, y);
+  y += 10;
+  doc.line(15, y - 4, 195, y - 4);
+  doc.text(`💰 Total Líquido a Receber: ${fmt(liquido)}`, 15, y);
 
-      const descontoVT = val011 * 0.06;
-
-      const totalProventos = val011 + val049 + val050 + val060 + val061 + val062 + vt_indenizacao;
-      const totalDescontos = inssValor + descontoVT;
-      const totalLiquido = totalProventos - totalDescontos;
-
-      // ---- MONTA O PDF ----
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(16);
-      doc.text("Holerite de Pagamento", 105, 15, null, null, "center");
-
-      doc.setFontSize(11);
-      doc.setFont("helvetica", "normal");
-      doc.text(`Funcionário: ${nome}`, 15, 25);
-      doc.text(`Referência: ${mesRef}`, 15, 31);
-
-      doc.line(15, 34, 195, 34);
-
-      let y = 42;
-
-      // Cabeçalho das 3 colunas
-      doc.setFont("helvetica", "bold");
-      doc.rect(15, y - 6, 180, 8);
-      doc.text("Descrição", 20, y);
-      doc.text("Referência", 100, y);
-      doc.text("Provento (R$)", 160, y);
-      y += 6;
-
-      doc.setFont("helvetica", "normal");
-
-      function linha(desc, ref, valor) {
-        y += 8;
-        doc.rect(15, y - 6, 180, 8);
-        doc.text(desc, 20, y);
-        doc.text(String(ref), 105, y);
-        doc.text(formatar(valor), 175, y, null, null, "right");
-      }
-
-      // PROVENTOS
-      linha("Salário Base (011)", `${diasTrabalhados} dias`, val011);
-      linha("Descanso Semanal (049)", `${domFeriado} dias`, val049);
-      linha("Adicional Noturno 20% (050)", `${horasNoturnas} h`, val050);
-      linha("Hora Extra 50% (060)", `${horas50} h`, val060);
-      linha("Hora Extra 100% (061)", `${horas100} h`, val061);
-      linha("Domingo/Feriado (062)", `${domFeriado} dias`, val062);
-      linha("Indenização Vale-Transp. (100)", `${diasVT} dias`, vt_indenizacao);
-
-      y += 10;
-      doc.setFont("helvetica", "bold");
-      doc.text(`Total de Proventos: ${formatar(totalProventos)}`, 20, y);
-
-      // DESCONTOS
-      y += 12;
-      doc.text("Descontos:", 15, y);
-      y += 6;
-      doc.setFont("helvetica", "normal");
-      doc.text(`INSS (310) - ${inssAliquota.toFixed(1)}%: ${formatar(inssValor)}`, 20, y);
-      y += 6;
-      doc.text(`Vale-Transporte (320) - 6%: ${formatar(descontoVT)}`, 20, y);
-      y += 8;
-      doc.setFont("helvetica", "bold");
-      doc.text(`Total de Descontos: ${formatar(totalDescontos)}`, 20, y);
-
-      y += 10;
-      doc.line(15, y, 195, y);
-      y += 8;
-      doc.text(`Total Líquido a Receber: ${formatar(totalLiquido)}`, 20, y);
-
-      const nomeArq = `${nome.replace(/\s+/g, "_")}_holerite_${mesRef.replace("/", "-")}.pdf`;
-      doc.save(nomeArq);
-    }
-  </script>
+  const nomeArq = `${nome.replace(/\s+/g, "_")}_holerite_${mes.replace("/", "-")}.pdf`;
+  doc.save(nomeArq);
+}
+</script>
 </body>
 </html>
