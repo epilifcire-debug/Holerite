@@ -174,7 +174,7 @@ function calcular(){
 
   const baseINSS = salarioBase + adicionalNoturno + valorHE50 + valorHE100 + valorDomingo + dsrValor;
 
-  const faixa1 = 1518.00, faixa2 = 2793.88, faixa3 = 4190.83;
+  const faixa1 = 1621.00, faixa2 = 3242.00, faixa3 = 4890.00;
   let descontoINSS = 0;
   if (baseINSS <= faixa1) descontoINSS = baseINSS * 0.075;
   else if (baseINSS <= faixa2) descontoINSS = (faixa1 * 0.075) + ((baseINSS - faixa1) * 0.09);
