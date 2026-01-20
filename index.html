@@ -165,7 +165,7 @@ function calcular(){
   const adicionalNoturno = vhn * 0.20 * horasNoturnas;
   const valorHE50 = vhn * 1.5 * horas50;
   const valorHE100 = vhn * 2.0 * horas100;
-  const valorDomingo = 101.20 * feriados;
+  const valorDomingo = 108.00 * feriados;
 
   const baseDSR = adicionalNoturno + valorHE50 + valorHE100 + valorDomingo;
   const dsrValor = diasUteis ? (baseDSR / diasUteis) * dsrDias : 0;
@@ -246,3 +246,4 @@ function gerarPDF(){
 </script>
 </body>
 </html>
+
